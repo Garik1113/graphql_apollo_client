@@ -30,6 +30,7 @@ export default class AddTodo extends React.Component {
               className='btn btn-success mt-2'
               onClick={() => {
                 addTodo({ variables: { title: input.value } });
+                input.value = "";
               }}
             >
               Add Todo

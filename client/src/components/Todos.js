@@ -20,6 +20,14 @@ const DELETE_TODO = gql`
     }
   }
 `;
+
+const COMPLETE_TODO = gql`
+  mutation CompleteTodo($id: Int!) {
+    completeTodo(id: $id) {
+      id
+    }
+  }
+`;
 class Todos extends React.Component {
   state = {
     todos: [],
@@ -49,7 +57,19 @@ class Todos extends React.Component {
                         }
                         className='list-group-item mt-2 d-flex align-items-center justify-content-between'
                       >
-                        {title}
+                        <Mutation mutation={COMPLETE_TODO}>
+                          {(completeTodo) => {
+                            return (
+                              <span
+                                onClick={() =>
+                                  completeTodo({ variables: { id: id } })
+                                }
+                              >
+                                {title}
+                              </span>
+                            );
+                          }}
+                        </Mutation>
                         <Mutation mutation={DELETE_TODO}>
                           {(deleteTodo) => {
                             return (

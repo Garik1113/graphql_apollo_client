@@ -55,24 +55,24 @@ const Mutation = new GraphQLObjectType({
         title: { type: GraphQLString },
       },
       resolve(parent, args) {
+        console.log(args.title);
         const todo = {
-          id: Todos.length,
+          id: Todos.length + 1,
           title: args.title,
           completed: false,
         };
-        Todos[Todos.length] = todo;
+        Todos.push(todo);
         return Todos;
       },
     },
-    editTodo: {
+    completeTodo: {
       type: TodoType,
       args: {
         id: { type: GraphQLInt },
-        isCompleted: { type: GraphQLBoolean },
       },
       resolve(parent, args) {
         Todos = Todos.map((e) =>
-          e.id === args.id ? { ...e, completed: args.isCompleted } : e
+          e.id === args.id ? { ...e, completed: !e.completed } : e
         );
         return Todos;
       },
