@@ -21,9 +21,9 @@ const DELETE_TODO = gql`
   }
 `;
 class Todos extends React.Component {
-  componentDidMount() {
-    console.log(Query.prototype);
-  }
+  state = {
+    todos: [],
+  };
   render() {
     return (
       <div className='container'>
@@ -36,6 +36,7 @@ class Todos extends React.Component {
             if (error) {
               return <p>Error...</p>;
             }
+
             return (
               <div className='jumbotron'>
                 <ul className='list-group'>
@@ -43,6 +44,9 @@ class Todos extends React.Component {
                     return (
                       <li
                         key={id}
+                        style={
+                          completed ? { textDecoration: "line-through" } : {}
+                        }
                         className='list-group-item mt-2 d-flex align-items-center justify-content-between'
                       >
                         {title}

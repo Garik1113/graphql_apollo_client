@@ -16,7 +16,7 @@ let Todos = [
   {
     id: 2,
     title: "Learn Java",
-    completed: false,
+    completed: true,
   },
   {
     id: 3,
